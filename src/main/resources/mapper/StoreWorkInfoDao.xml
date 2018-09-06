@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.plus.dao.StoreWorkInfoDao">
+	<resultMap id="BaseResultMap" type="com.mybatis.plus.entity.StoreWorkInfo">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="user_name" jdbcType="VARCHAR" property="userName" />
+		<result column="work_num" jdbcType="VARCHAR" property="workNum" />
+		<result column="work_username" jdbcType="VARCHAR" property="workUsername" />
+		<result column="store_code" jdbcType="VARCHAR" property="storeCode" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id, user_name, work_num, work_username, store_code,create_time,update_time
+	</sql>
+	
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List" />
+		from 
+			store_work_info
+		where 
+			id = #{id,jdbcType=VARCHAR}
+	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+			store_work_info
+		where 
+			id = #{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<update id="updateByPrimaryKeySelective" parameterType="com.mybatis.plus.entity.StoreWorkInfo">
+		update store_work_info
+		<set> 
+			<if test="userName != null"> 
+				user_name = #{userName,jdbcType=VARCHAR}, 
+			</if> 
+			<if test="workNum != null"> 
+				work_num = #{workNum,jdbcType=VARCHAR}, 
+			</if> 
+			<if test="workUsername != null"> 
+				work_username = #{workUsername,jdbcType=VARCHAR}, 
+			</if> 
+			<if test="storeCode != null"> 
+				store_code = #{storeCode,jdbcType=VARCHAR}, 
+			</if> 
+			<if test="createTime != null"> 
+				create_time = #{createTime,jdbcType=TIMESTAMP}, 
+			</if> 
+			<if test="updateTime != null"> 
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateByPrimaryKey" parameterType="com.mybatis.plus.entity.StoreWorkInfo">
+		update 
+			store_work_info
+		set 
+			user_name = #{userName,jdbcType=VARCHAR},
+			work_num = #{workNum,jdbcType=VARCHAR},
+			work_username = #{workUsername,jdbcType=VARCHAR},
+			store_code = #{storeCode,jdbcType=VARCHAR},
+			create_time = #{createTime,jdbcType=TIMESTAMP},
+			update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where 
+			id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+</mapper> 
